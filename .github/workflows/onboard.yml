@@ -1,10 +1,9 @@
 on:
   repository_dispatch:
-    types: [issue.key]
 
 jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          MESSAGE: ${{ github.event.client_payload.issue.key }}
+          MESSAGE: ${{ github.event.client_payload.key }}
         run: echo $ISSUE.KEY
