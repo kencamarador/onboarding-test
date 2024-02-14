@@ -9,7 +9,7 @@ jobs:
       - name: Echo Key
         env:
           KEY: ${{ github.event.client_payload.key }}
-          DESCRIPTION: ${{ github.event.client_payload.description }}
-        run: echo $DESCRIPTION
+          FIRSTNAME: ${{ github.event.client_payload.firstname }}
+        run: echo $FIRSTNAME
 
 
