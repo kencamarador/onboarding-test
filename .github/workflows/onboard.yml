@@ -10,6 +10,7 @@ jobs:
         env:
           KEY: ${{ github.event.client_payload.key }}
           FIRSTNAME: ${{ github.event.client_payload.firstname }}
-        run: echo $FIRSTNAME
+          LASTNAME: ${{ github.event.client_payload.lastname }}
+        run: echo $FIRSTNAME $LASTNAME
 
 
