@@ -14,7 +14,6 @@ jobs:
           ACCESSTOKENSECURE: ${{ secrets.accessTokenSecure }}
           
         run: |
-
           $accessTokenSecure = ConvertTo-SecureString -String $env:ACCESSTOKENSECURE -AsPlainText -Force
 
           Connect-MgGraph -AccessToken $accessTokenSecure
