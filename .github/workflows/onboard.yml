@@ -14,7 +14,9 @@ jobs:
 
       - name: Execute script
         run: |
-          $users = curl -s -X GET -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" https://graph.microsoft.com/v1.0/users
+          ACCESSTOKENSECURE = ${{ secrets.ACCESSTOKENSECURE }}
+  
+          $users = curl -s -X GET -H "Authorization: Bearer $ACCESSTOKENSECURE" -H "Content-type: application/json" https://graph.microsoft.com/v1.0/users
           echo $users
 
 
