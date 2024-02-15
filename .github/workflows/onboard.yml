@@ -14,9 +14,7 @@ jobs:
           ACCESSTOKENSECURE: ${{ secrets.accessTokenSecure }}
           
         run: |
-          $accessTokenSecure = ConvertTo-SecureString -String $env:ACCESSTOKENSECURE -AsPlainText -Force
-
-          Connect-MgGraph -AccessToken $accessTokenSecure
+          Connect-MgGraph
 
           $UPN = "$($FirstName).$($LastName)@kencamarador.com"
 
