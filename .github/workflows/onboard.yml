@@ -14,24 +14,10 @@ jobs:
 
       - name: Execute script
         run: |
+          $users = curl -s -X GET -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" https://graph.microsoft.com/v1.0/users
+          echo $users
 
-          Import-Module Microsoft.Graph.Users
-          
-          $accessTokenSecure = ConvertTo-SecureString -String $env:ACCESSTOKENSECURE -AsPlainText -Force
 
-          Connect-MgGraph -AccessToken $accessTokenSecure
 
-          $UPN = "$($FirstName).$($LastName)@kencamarador.com"
+        
 
-          $params = @{
-            accountEnabled = $true
-            displayName = "$FIRSTNAME $LASTNAME"
-            mailNickname = "AdeleV"
-            userPrincipalName = "$UPN"
-            passwordProfile = @{
-              forceChangePasswordNextSignIn = $true
-              password = "xWwvJ]6NMw+bWH-d"
-            }
-          }
-
-          New-MgUser -BodyParameter $params
