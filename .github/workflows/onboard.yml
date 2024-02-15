@@ -15,14 +15,21 @@ jobs:
         run: |
           echo $FIRSTNAME $LASTNAME
 
-          $accessTokenSecure = ConvertTo-SecureString -String $env:ACCESSTOKENSECURE
+          $accessTokenSecure = ConvertTo-SecureString -String $env:ACCESSTOKENSECURE -AsPlainText -Force
 
-          Connect-AzAccount -AccessToken $accessTokenSecure
+          Connect-MgGraph -AccessToken $accessTokenSecure
 
-          $UPN = "$FirstName.$LastName@arteria.ai"
+          $UPN = "$($FirstName).$($LastName)@kencamarador.com"
 
-          $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
-          $GeneratedPassword = New-AzureADUserPassword -Length 12 -IncludeLowercase -IncludeUppercase -IncludeNumbers -IncludeSpecialCharacters
-          $PasswordProfile.Password = ConvertTo-SecureString -String $GeneratedPassword -AsPlainText -Force
+          $params = @{
+            accountEnabled = $true
+            displayName = "$FIRSTNAME $LASTNAME"
+            mailNickname = "AdeleV"
+            userPrincipalName = "$UPN"
+            passwordProfile = @{
+              forceChangePasswordNextSignIn = $true
+              password = "xWwvJ]6NMw+bWH-d"
+            }
+          }
 
-          New-AzureADUser -DisplayName "$FIRSTNAME $LASTNAME" -PasswordProfile $PasswordProfile -UserPrincipalName $UPN -AccountEnabled $true
+          New-MgUser -BodyParameter $params
