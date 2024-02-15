@@ -6,12 +6,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Echo Key
         env:
           KEY: ${{ github.event.client_payload.key }}
           FIRSTNAME: ${{ github.event.client_payload.firstname }}
           LASTNAME: ${{ github.event.client_payload.lastname }}
           ACCESSTOKENSECURE: ${{ secrets.accessTokenSecure }}
+
+      - name: Install Module
+        run: Get-InstalledModule Microsoft.Graph
+
+
       - name: Execute script
         run: |
           $accessTokenSecure = ConvertTo-SecureString -String $env:ACCESSTOKENSECURE -AsPlainText -Force
