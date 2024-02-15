@@ -13,9 +13,8 @@ jobs:
           LASTNAME: ${{ github.event.client_payload.lastname }}
           
         run: |
-          echo $FIRSTNAME $LASTNAME
 
-          ACCESSTOKENSECURE: ${{ secrets.accessTokenSecure }}
+          ACCESSTOKENSECURE= ${{ secrets.accessTokenSecure }}
 
           $accessTokenSecure = ConvertTo-SecureString -String $env:ACCESSTOKENSECURE -AsPlainText -Force
 
