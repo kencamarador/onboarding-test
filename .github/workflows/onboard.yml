@@ -15,8 +15,6 @@ jobs:
         run: |
           echo $FIRSTNAME $LASTNAME
 
-          Install-Module -Name Microsoft.Graph
-
           ACCESSTOKENSECURE: ${{ secrets.accessTokenSecure }}
 
           $accessTokenSecure = ConvertTo-SecureString -String $env:ACCESSTOKENSECURE -AsPlainText -Force
