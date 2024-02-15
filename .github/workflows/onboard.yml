@@ -14,16 +14,14 @@ jobs:
         run: |
           ACCESSTOKENSECURE=${{ secrets.ACCESSTOKENSECURE }}
           curl -s -X POST -H "Authorization: Bearer $ACCESSTOKENSECURE" -H "Content-type: application/json" https://graph.microsoft.com/v1.0/users
-
-
           {
             "accountEnabled": true,
             "displayName": "Addfsle Vence",
             "mailNickname": "reeV",
             "userPrincipalName": "AdelEFWWE@kencamarador.com",
             "passwordProfile" : {
-              "forceChangePasswordNextSignIn": true,
-              "password": "xWwvJ]dfsdfsw+bWH-d"
+            "forceChangePasswordNextSignIn": true,
+            "password": "xWwvJ]dfsdfsw+bWH-d"
             }
           }
 
