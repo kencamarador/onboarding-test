@@ -11,7 +11,6 @@ jobs:
           KEY: ${{ github.event.client_payload.key }}
           FIRSTNAME: ${{ github.event.client_payload.firstname }}
           LASTNAME: ${{ github.event.client_payload.lastname }}
-      - name: Execute script
         run: |
           echo $FIRSTNAME $LASTNAME
           ACCESSTOKENSECURE=${{ secrets.ACCESSTOKENSECURE }}
