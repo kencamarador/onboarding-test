@@ -17,12 +17,11 @@ jobs:
           curl -X POST -H "Authorization: Bearer $ACCESSTOKENSECURE" -H "Content-type: application/json" \
           -d '{
             "accountEnabled": true,
-            "displayName": "Lkfen Doe",
-            "mailNickname": "gwoe",
-            "userPrincipalName": "jdfewee@kencamarador.com",
+            "displayName": "$FIRSTNAME $LASTNAME",
+            "userPrincipalName": "$FIRSTNAME.$LASTNAME@kencamarador.com",
             "passwordProfile": {
               "forceChangePasswordNextSignIn": false,
-              "password": "yourSeeeeeresword123"
+              "password": "yourSfefsword123"
             }
           }' \
           https://graph.microsoft.com/v1.0/users
