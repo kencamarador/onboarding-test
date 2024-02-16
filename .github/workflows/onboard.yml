@@ -12,18 +12,22 @@ jobs:
           LASTNAME: ${{ github.event.client_payload.lastname }}
       - name: Execute script
         run: |
+          echo $FIRSTNAME $LASTNAME
           ACCESSTOKENSECURE=${{ secrets.ACCESSTOKENSECURE }}
-          curl -s -X POST -H "Authorization: Bearer $ACCESSTOKENSECURE" -H "Content-type: application/json" https://graph.microsoft.com/v1.0/users
-          {
+          curl -X POST -H "Authorization: Bearer $ACCESSTOKENSECURE" -H "Content-type: application/json" \
+          -d '{
             "accountEnabled": true,
-            "displayName": "Addfsle Vence",
-            "mailNickname": "reeV",
-            "userPrincipalName": "AdelEFWWE@kencamarador.com",
-            "passwordProfile" : {
-            "forceChangePasswordNextSignIn": true,
-            "password": "xWwvJ]dfsdfsw+bWH-d"
+            "displayName": "Lkfen Doe",
+            "mailNickname": "gwoe",
+            "userPrincipalName": "jdfewee@kencamarador.com",
+            "passwordProfile": {
+              "forceChangePasswordNextSignIn": false,
+              "password": "yourSeeeeeresword123"
             }
-          }
+          }' \
+          https://graph.microsoft.com/v1.0/users
+
+
 
 
         
