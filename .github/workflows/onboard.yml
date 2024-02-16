@@ -18,6 +18,7 @@ jobs:
           -d '{
             "accountEnabled": true,
             "displayName": "$FIRSTNAME $LASTNAME",
+            "mailNickname": "gwoe",
             "userPrincipalName": "$FIRSTNAME.$LASTNAME@kencamarador.com",
             "passwordProfile": {
               "forceChangePasswordNextSignIn": false,
@@ -25,8 +26,6 @@ jobs:
             }
           }' \
           https://graph.microsoft.com/v1.0/users
-
-
 
 
         
