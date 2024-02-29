@@ -24,7 +24,7 @@ jobs:
 
           echo "Got the token"
 
-          curl -X POST -H "Authorization: Bearer $ACCESSTOKENSECURE" -H "Content-type: application/json" \
+          curl -X POST -H "Authorization: Bearer$ACCESSTOKENSECURE" -H "Content-type: application/json" \
           -d '{
             "accountEnabled": false,
             "displayName": "'"$FIRSTNAME $LASTNAME"'",
