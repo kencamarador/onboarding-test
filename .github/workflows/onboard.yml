@@ -23,8 +23,10 @@ jobs:
           | jq -r .access_token)
 
           echo "Got the token"
+          
+          PASSWORD=$(openssl rand -base64 12 | tr -d '\n')
 
-          curl -X POST -H "Authorization: Bearer$ACCESSTOKENSECURE" -H "Content-type: application/json" \
+          curl -X POST -H "Authorization: Bearer $ACCESSTOKENSECURE" -H "Content-type: application/json" \
           -d '{
             "accountEnabled": false,
             "displayName": "'"$FIRSTNAME $LASTNAME"'",
@@ -32,7 +34,7 @@ jobs:
             "userPrincipalName": "'"$FIRSTNAME.$LASTNAME@kencamarador.com"'",
             "passwordProfile": {
               "forceChangePasswordNextSignIn": true,
-              "password=$(openssl rand -base64 12)""
+              "password": "'"$PASSWORD"'"
             }
           }' \
           https://graph.microsoft.com/v1.0/users
