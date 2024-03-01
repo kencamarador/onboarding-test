@@ -16,7 +16,7 @@ jobs:
           CLIENT_ID=${{ vars.CLIENT_ID }}
           CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
           
-          ACCESSTOKENSECURE=$(curl -X POST \
+          TOKEN=$(curl -X POST \
           -H "Host: login.microsoftonline.com" \
           -H "Content-type: application/x-www-form-urlencoded" \
           https://login.microsoftonline.com/0496c0c5-5b34-4de0-a252-686f82ec384f/oauth2/v2.0/token \
@@ -24,10 +24,11 @@ jobs:
           | jq -r .access_token)
 
           echo "Got the token"
+          echo "Access Token: $TOKEN"
           
           PASSWORD=$(openssl rand -base64 12 | tr -d '\n')
 
-          curl -X POST -H "Authorization: Bearer $ACCESSTOKENSECURE" -H "Content-type: application/json" \
+          curl -X POST -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
           -d '{
             "accountEnabled": false,
             "displayName": "'"$FIRSTNAME $LASTNAME"'",
