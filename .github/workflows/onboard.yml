@@ -26,7 +26,7 @@ jobs:
           
           PASSWORD=$(openssl rand -base64 12)
           USERPRINCIPALNAME=$(echo "$FIRSTNAME.$LASTNAME@kencamarador.com" | tr '[:upper:]' '[:lower:]')
-          DISPLAYNAME=$(echo "$FIRSTNAME $LASTNAME" | sed 's/\b\(.\)/\u\1/g')
+          DISPLAYNAME=$(echo "$FIRSTNAME $LASTNAME" | sed -E 's/\b([a-z])/\u\1/g')
           MAILNICKNAME=$(echo "$FIRSTNAME.$LASTNAME" | tr '[:upper:]' '[:lower:]')
 
           curl -X POST -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
