@@ -14,7 +14,7 @@ jobs:
         run: |
           echo $FIRSTNAME $LASTNAME
           CS=$(CLIENT_ID=${{ vars.CLIENT_ID }})
-          echo
+          echo "$CS"
           CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
           
           TOKEN=$(curl -X POST \
