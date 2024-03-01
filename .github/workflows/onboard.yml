@@ -35,7 +35,7 @@ jobs:
           -d '{
             "accountEnabled": false,
             "displayName": "'"$FIRSTNAME $LASTNAME"'",
-            "mailNickname": "$FIRSTNAME $LASTNAME",
+            "mailNickname": "ssss",
             "userPrincipalName": "'"$FIRSTNAME.$LASTNAME@kencamarador.com"'",
             "passwordProfile": {
               "forceChangePasswordNextSignIn": true,
