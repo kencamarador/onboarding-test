@@ -23,17 +23,25 @@ jobs:
           | jq -r .access_token)
 
           echo "Got the token"
-          
+          echo "User is "
+
           PASSWORD=$(openssl rand -base64 12)
           USERPRINCIPALNAME=$(echo "$FIRSTNAME.$LASTNAME@kencamarador.com" | tr '[:upper:]' '[:lower:]')
           DISPLAYNAME=$(echo "$FIRSTNAME $LASTNAME" | sed -E 's/\b([a-z])/\u\1/g')
           MAILNICKNAME=$(echo "$FIRSTNAME.$LASTNAME" | tr '[:upper:]' '[:lower:]')
+
+          if [ "$JOBTITLE" == "Full Time" ]; then
+            echo ""
+          else
+           echo "Contractor"
+          fi
 
           curl -X POST -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
           -d '{
             "accountEnabled": false,
             "displayName": "'"$DISPLAYNAME"'",
             "mailNickname": "'"$MAILNICKNAME"'",
+            "jobTitle": "'"$JOBTITLE"'",
             "userPrincipalName": "'"$USERPRINCIPALNAME"'",
             "passwordProfile": {
               "forceChangePasswordNextSignIn": true,
