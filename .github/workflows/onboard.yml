@@ -32,6 +32,8 @@ jobs:
           DISPLAYNAME=$(echo "$FIRSTNAME $LASTNAME" | sed -E 's/\b([a-z])/\u\1/g')
           MAILNICKNAME=$(echo "$FIRSTNAME.$LASTNAME" | tr '[:upper:]' '[:lower:]')
 
+          JOBTITLE="$TITLE"
+
           if [ "$JOBTITLE" == "Full Time" ]; then
             echo ""
           else
@@ -43,7 +45,7 @@ jobs:
             "accountEnabled": false,
             "displayName": "'"$DISPLAYNAME"'",
             "mailNickname": "'"$MAILNICKNAME"'",
-            "jobTitle": "'"$JOBTITLE"'",
+            "jobTitle": "'"$TITLE"'",
             "userPrincipalName": "'"$USERPRINCIPALNAME"'",
             "passwordProfile": {
               "forceChangePasswordNextSignIn": true,
