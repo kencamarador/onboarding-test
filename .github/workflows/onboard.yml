@@ -13,7 +13,8 @@ jobs:
           LASTNAME: ${{ github.event.client_payload.lastname }}
         run: |
           echo $FIRSTNAME $LASTNAME
-          CLIENT_ID=${{ vars.CLIENT_ID }}
+          CS=$(CLIENT_ID=${{ vars.CLIENT_ID }})
+          echo
           CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
           
           TOKEN=$(curl -X POST \
