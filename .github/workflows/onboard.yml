@@ -13,7 +13,6 @@ jobs:
           LASTNAME: ${{ github.event.client_payload.lastname }}
           JOBTITLE: ${{ github.event.client_payload.title }}
         run: |
-          echo $JOBTITLE
           CLIENT_ID=${{ vars.CLIENT_ID }}
           CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
           
@@ -25,7 +24,7 @@ jobs:
           | jq -r .access_token)
 
           echo "Got the token"
-          echo "User is "
+          echo "User is $FIRSTNAME $LASTNAME"
 
           PASSWORD=$(openssl rand -base64 12)
           USERPRINCIPALNAME=$(echo "$FIRSTNAME.$LASTNAME@kencamarador.com" | tr '[:upper:]' '[:lower:]')
@@ -49,6 +48,12 @@ jobs:
           object_id=$(echo "$response" | jq -r '.id')
           echo "Object ID: $object_id"
 
+          user_created=$(echo "$response" | jq -r '.displayName')
+          echo "User: $user_created"
+
+          email_created=$(echo "$response" | jq -r '.userPrincipalName')
+          echo "User: $email_created"
+
           group_endpoints=(
             "https://graph.microsoft.com/v1.0/groups/dfd49c60-81f9-4995-8b36-fabbf8f70581/members/\$ref"
             "https://graph.microsoft.com/v1.0/groups/74e15387-a236-45ad-9b78-e18a778ba407/members/\$ref"
@@ -62,3 +67,10 @@ jobs:
                     }" \
                 "$endpoint"
           done
+
+          user_created=$(echo "$response" | jq -r '.displayName')
+          echo "User: $user_created"
+
+          email_created=$(echo "$response" | jq -r '.userPrincipalName')
+          echo "User Email: $email_created"
+
