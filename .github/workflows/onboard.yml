@@ -46,7 +46,19 @@ jobs:
           }' \
           https://graph.microsoft.com/v1.0/users)
 
-          object_id=$(echo $response | jq -r '.id')
+          object_id=$(echo "$response" | jq -r '.id')
           echo "Object ID: $object_id"
 
+          group_endpoints=(
+            "https://graph.microsoft.com/v1.0/groups/dfd49c60-81f9-4995-8b36-fabbf8f70581/members/\$ref"
+            "https://graph.microsoft.com/v1.0/groups/74e15387-a236-45ad-9b78-e18a778ba407/members/\$ref"
 
+          )
+          
+          for endpoint in "${group_endpoints[@]}"; do
+            curl -X POST -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
+                -d "{
+                      \"@odata.id\": \"https://graph.microsoft.com/v1.0/directoryObjects/$object_id\"
+                    }" \
+                "$endpoint"
+          done
