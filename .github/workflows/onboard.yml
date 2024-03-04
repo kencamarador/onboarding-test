@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Echo Key
+      - name: Account Provisioning
         env:
           KEY: ${{ github.event.client_payload.key }}
           FIRSTNAME: ${{ github.event.client_payload.firstname }}
@@ -24,7 +24,7 @@ jobs:
           | jq -r .access_token)
 
           echo "Got the token"
-          echo "User is $FIRSTNAME $LASTNAME"
+          echo "$FIRSTNAME $LASTNAME to be created..."
 
           PASSWORD=$(openssl rand -base64 12)
           USERPRINCIPALNAME=$(echo "$FIRSTNAME.$LASTNAME@kencamarador.com" | tr '[:upper:]' '[:lower:]')
@@ -44,15 +44,11 @@ jobs:
             }
           }' \
           https://graph.microsoft.com/v1.0/users)
-
           object_id=$(echo "$response" | jq -r '.id')
-          echo "Object ID: $object_id"
 
-          user_created=$(echo "$response" | jq -r '.displayName')
-          echo "User: $user_created"
-
-          email_created=$(echo "$response" | jq -r '.userPrincipalName')
-          echo "User: $email_created"
+          echo "Account created"
+          echo "Account set to disabled"
+          echo "Adding User to the default Azure AD Groups..."
 
           group_endpoints=(
             "https://graph.microsoft.com/v1.0/groups/dfd49c60-81f9-4995-8b36-fabbf8f70581/members/\$ref"
@@ -68,9 +64,12 @@ jobs:
                 "$endpoint"
           done
 
+          echo "Azure AD Groups added succesfully"
+          echo "Account provisioning completed, see details below:"
+
           user_created=$(echo "$response" | jq -r '.displayName')
           echo "User: $user_created"
-
+          echo "User ID: $object_id"
           email_created=$(echo "$response" | jq -r '.userPrincipalName')
-          echo "User Email: $email_created"
+          echo "Email: $email_created"
 
