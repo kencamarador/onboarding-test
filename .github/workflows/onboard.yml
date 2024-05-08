@@ -33,40 +33,42 @@ jobs:
 
           if [[ "${JOBTITLE}" != "Contractor" ]]; then
 
-          response=$(curl -X POST -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
-          -d '{
-            "accountEnabled": false,
-            "displayName": "'"$DISPLAYNAME"'",
-            "mailNickname": "'"$MAILNICKNAME"'",
-            "givenName": "'"$FIRSTNAME"'",
-            "surName": "'"$LASTNAME"'",
-            "mail": "'"$USERPRINCIPALNAME"'",
-            "userPrincipalName": "'"$USERPRINCIPALNAME"'",
-            "passwordProfile": {
-              "forceChangePasswordNextSignIn": true,
-              "password": "'"$PASSWORD"'"
-            }
-          }' \
-          https://graph.microsoft.com/v1.0/users)
+              response=$(curl -X POST -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
+              -d '{
+                "accountEnabled": false,
+                "displayName": "'"$DISPLAYNAME"'",
+                "mailNickname": "'"$MAILNICKNAME"'",
+                "givenName": "'"$FIRSTNAME"'",
+                "surName": "'"$LASTNAME"'",
+                "mail": "'"$USERPRINCIPALNAME"'",
+                "userPrincipalName": "'"$USERPRINCIPALNAME"'",
+                "passwordProfile": {
+                  "forceChangePasswordNextSignIn": true,
+                  "password": "'"$PASSWORD"'"
+                }
+              }' \
+              https://graph.microsoft.com/v1.0/users)
 
           else
 
-          response=$(curl -X POST -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
-          -d '{
-            "accountEnabled": false,
-            "displayName": "'"$DISPLAYNAME"'",
-            "mailNickname": "'"$MAILNICKNAME"'",
-            "jobTitle": "'"$JOBTITLE"'",
-            "givenName": "'"$FIRSTNAME"'",
-            "surName": "'"$LASTNAME"'",
-            "mail": "'"$USERPRINCIPALNAME"'",
-            "userPrincipalName": "'"$USERPRINCIPALNAME"'",
-            "passwordProfile": {
-              "forceChangePasswordNextSignIn": true,
-              "password": "'"$PASSWORD"'"
-            }
-          }' \
-          https://graph.microsoft.com/v1.0/users)
+              response=$(curl -X POST -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
+              -d '{
+                "accountEnabled": false,
+                "displayName": "'"$DISPLAYNAME"'",
+                "mailNickname": "'"$MAILNICKNAME"'",
+                "jobTitle": "'"$JOBTITLE"'",
+                "givenName": "'"$FIRSTNAME"'",
+                "surName": "'"$LASTNAME"'",
+                "mail": "'"$USERPRINCIPALNAME"'",
+                "userPrincipalName": "'"$USERPRINCIPALNAME"'",
+                "passwordProfile": {
+                  "forceChangePasswordNextSignIn": true,
+                  "password": "'"$PASSWORD"'"
+                }
+              }' \
+              https://graph.microsoft.com/v1.0/users)
+
+          fi
 
           object_id=$(echo "$response" | jq -r '.id')
 
