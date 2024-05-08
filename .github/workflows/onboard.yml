@@ -42,7 +42,7 @@ jobs:
             "accountEnabled": false,
             "displayName": "'"$DISPLAYNAME"'",
             "mailNickname": "'"$MAILNICKNAME"'",
-            "jobTitle": "'"$JOBTITLE"'",
+            '"${{ if ne(env.JOBTITLE, '') }}'" : "'"$JOBTITLE"'",
             "givenName": "'"$FIRSTNAME"'",
             "surName": "'"$LASTNAME"'",
             "mail": "'"$USERPRINCIPALNAME"'",
