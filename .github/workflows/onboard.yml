@@ -39,6 +39,7 @@ jobs:
             "jobTitle": "'"$JOBTITLE"'",
             "givenName": "'"$FIRSTNAME"'",
             "surName": "'"$LASTNAME"'",
+            "mail": "'"$USERPRINCIPALNAME"'",
             "userPrincipalName": "'"$USERPRINCIPALNAME"'",
             "passwordProfile": {
               "forceChangePasswordNextSignIn": true,
