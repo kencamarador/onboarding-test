@@ -6,12 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set Job Title
-        run: |
-          if [[ "${{ github.event.inputs.title }}" == "contractor" ]]; then
-            echo "Job Title: Contractor"
-            echo "JOBTITLE=contractor" >> $GITHUB_ENV
-          fi
       - name: Account Provisioning - Developer
         env:
           KEY: ${{ github.event.client_payload.key }}
