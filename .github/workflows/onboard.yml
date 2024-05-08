@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Account Provisioning
+      - name: Account Provisioning - Developer
         env:
           KEY: ${{ github.event.client_payload.key }}
           FIRSTNAME: ${{ github.event.client_payload.firstname }}
@@ -37,6 +37,8 @@ jobs:
             "displayName": "'"$DISPLAYNAME"'",
             "mailNickname": "'"$MAILNICKNAME"'",
             "jobTitle": "'"$JOBTITLE"'",
+            "givenName": "$FIRSTNAME",
+            "surName": "$LASTNAME",
             "userPrincipalName": "'"$USERPRINCIPALNAME"'",
             "passwordProfile": {
               "forceChangePasswordNextSignIn": true,
@@ -44,6 +46,7 @@ jobs:
             }
           }' \
           https://graph.microsoft.com/v1.0/users)
+
           object_id=$(echo "$response" | jq -r '.id')
 
           echo "Account created"
