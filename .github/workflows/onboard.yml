@@ -31,7 +31,7 @@ jobs:
           DISPLAYNAME=$(echo "$FIRSTNAME $LASTNAME" | sed -E 's/\b([a-z])/\u\1/g')
           MAILNICKNAME=$(echo "$FIRSTNAME.$LASTNAME" | tr '[:upper:]' '[:lower:]')
 
-          if [[ "${JOBTITLE}" != "contractor" ]]; then
+          if [[ "${JOBTITLE}" != "Contractor" ]]; then
               NEWJOBTITLE=""
           else
               NEWJOBTITLE="${JOBTITLE}"
