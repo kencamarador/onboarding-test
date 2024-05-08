@@ -32,9 +32,9 @@ jobs:
           MAILNICKNAME=$(echo "$FIRSTNAME.$LASTNAME" | tr '[:upper:]' '[:lower:]')
 
           if [[ "${JOBTITLE}" != "contractor" ]]; then
-            NEWJOBTITLE=""
+              NEWJOBTITLE=""
           else
-            NEWJOBTITLE="${JOBTITLE}"
+              NEWJOBTITLE="${JOBTITLE}"
           fi
 
           response=$(curl -X POST -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
