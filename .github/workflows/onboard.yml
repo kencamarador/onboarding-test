@@ -37,12 +37,18 @@ jobs:
           DISPLAYNAME=$(echo "$FIRSTNAME $LASTNAME" | sed -E 's/\b([a-z])/\u\1/g')
           MAILNICKNAME=$(echo "$FIRSTNAME.$LASTNAME" | tr '[:upper:]' '[:lower:]')
 
+          if [[ "${JOBTITLE}" != "contractor" ]]; then
+            NEWJOBTITLE=""
+          else
+            NEWJOBTITLE="${JOBTITLE}"
+          fi
+
           response=$(curl -X POST -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
           -d '{
             "accountEnabled": false,
             "displayName": "'"$DISPLAYNAME"'",
             "mailNickname": "'"$MAILNICKNAME"'",
-            '"${{ if ne(env.JOBTITLE, '') }}'" : "'"$JOBTITLE"'",
+            "jobTitle": "'"$NEWJOBTITLE"'",
             "givenName": "'"$FIRSTNAME"'",
             "surName": "'"$LASTNAME"'",
             "mail": "'"$USERPRINCIPALNAME"'",
